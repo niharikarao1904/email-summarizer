@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Summarizer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <svg class="logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+        <h1>Smart Summarizer</h1>
+      </div>
+      <div class="status-indicator">
+        <span class="status-dot" id="statusDot"></span>
+        <span class="status-text" id="statusText">Checking...</span>
+      </div>
+    </header>
+
+    <!-- Input Section -->
+    <section class="section input-section">
+      <div class="section-header">
+        <h2>Source Text</h2>
+        <span class="char-count" id="charCount">0 characters</span>
+      </div>
+      <textarea
+        id="inputText"
+        class="text-area"
+        placeholder="Click 'Extract Page Text' or paste text here..."
+      ></textarea>
+      <div class="input-controls">
+        <button class="btn btn-primary" id="extractBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14,2 14,8 20,8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+          </svg>
+          Extract Page Text
+        </button>
+        <button class="btn btn-ghost" id="clearBtn">Clear</button>
+      </div>
+    </section>
+
+    <!-- Controls Section -->
+    <section class="section controls-section">
+      <div class="control-group">
+        <label class="control-label">
+          <span>Summary Length</span>
+          <span class="control-value" id="lengthValue">100 words</span>
+        </label>
+        <input type="range" id="lengthSlider" min="50" max="300" value="100" class="slider">
+      </div>
+      <div class="action-buttons">
+        <button class="btn btn-accent btn-large" id="summarizeBtn" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="13,2 3,14 12,14 11,22 21,10 12,10 13,2"/>
+          </svg>
+          Summarize
+        </button>
+        <button class="btn btn-secondary" id="copyBtn" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+          Copy
+        </button>
+      </div>
+    </section>
+
+    <!-- Output Section -->
+    <section class="section output-section">
+      <div class="section-header">
+        <h2>Summary</h2>
+      </div>
+      <div class="output-card" id="outputCard">
+        <div class="output-empty" id="emptyState">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.586a1 1 0 0 1 .707.293l5.414 5.414a1 1 0 0 1 .293.707V19a2 2 0 0 1-2 2z"/>
+          </svg>
+          <p>Your summary will appear here</p>
+        </div>
+        <div class="output-loading" id="loadingState">
+          <div class="spinner"></div>
+          <p>Analyzing text...</p>
+        </div>
+        <div class="output-content" id="outputContent">
+          <p id="summaryText"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+      <span class="toast-message" id="toastMessage"></span>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
