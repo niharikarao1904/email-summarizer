@@ -11,7 +11,7 @@ class Summarizer:
 
     def load_model(self):
         print('Loading BART-large-CNN model...')
-        model_name = 'facebook/bart-large-cnn'
+        model_name = 'sshleifer/distilbart-cnn-12-6'
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
         self._ready = True
