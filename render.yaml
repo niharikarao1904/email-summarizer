@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: email-summarizer
+    env: docker
+    repo: https://github.com/niharikarao1904/email-summarizer
+    branch: main
+    dockerfilePath: Dockerfile
+    plan: free
+    region: oregon
+    # Note: set HF_TOKEN as a secret in the Render dashboard after creating the service.
