@@ -1,0 +1,11 @@
+.git
+.gitignore
+README.md
+*.md
+__pycache__
+*.pyc
+.env
+.venv
+venv
+chrome-extension
+.DS_Store

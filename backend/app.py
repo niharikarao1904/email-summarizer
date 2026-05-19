@@ -6,7 +6,12 @@ app = Flask(__name__)
 CORS(app)
 
 summarizer = Summarizer()
-
+try:
+    # Load model at startup so the service is ready to serve requests
+    summarizer.load_model()
+except Exception:
+    # If model fails to load at import time, keep the app running and report via /health
+    pass
 @app.route('/health', methods=['GET'])
 def health():
     return jsonify({
@@ -44,7 +49,5 @@ def summarize():
 if __name__ == '__main__':
     print('Starting Smart Email Summarizer API...')
     print('Loading NLP model (this may take a minute on first run)...')
-    summarizer.load_model()
-    print('Model ready!')
     print('API running at http://localhost:5000')
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=False, host='0.0.0.0', port=5000)
